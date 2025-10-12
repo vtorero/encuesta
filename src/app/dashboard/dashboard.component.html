@@ -1,0 +1,650 @@
+<div class="content">
+    <app-barratareas></app-barratareas>
+
+  <div class="container-fluid">
+    <div class="row">
+        <div class="input-group date" style="padding-top: 26px;width: 100%;float: right;display: flex;background: white;">
+            <div class="input-group-addon">Período&nbsp;&nbsp;
+                              <i class="fa fa-calendar"></i>
+                            </div>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Fecha Inicio</mat-label>
+                                <input name="fecha" [(ngModel)]="selectedMoment" #fecha="ngModel"  matInput [matDatepicker]="picker">
+                                <mat-hint>DD/MM/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
+                              <mat-form-field appearance="outline">
+                                <mat-label>Fecha Fin</mat-label>
+                                <input name="fecha2" [(ngModel)]="selectedMoment2"  #fecha2="ngModel" matInput [matDatepicker]="picker2">
+                                <mat-hint>DD/MM/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                              </mat-form-field>
+                              <button type="button"  class="enviar"  (click)="enviaFechas()"  mat-raised-button color="primary"  cdkFocusInitial><i class="material-icons">search</i> Consultar</button>
+            </div>
+
+    </div>
+      <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4">
+              <div class="card card-stats">
+                  <div class="card-header card-header-warning card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">attach_money</i>
+                      </div>
+                      <p class="card-category">Ingresos</p>
+                      <h3 class="card-title">S/ {{ventaTotal}}
+                          <small></small>
+                      </h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <!--<i class="material-icons text-danger">warning</i>
+                          <a href="javascript:void(0)">Get More Space...</a>-->
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+              <div class="card card-stats">
+                  <div class="card-header card-header-success card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">attach_money</i>
+                      </div>
+                      <p class="card-category">Pendientes</p>
+                      <h3 class="card-title">S/ {{montoPendiente}} </h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                         <!-- <i class="material-icons">date_range</i> Last 24 Hours-->
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+              <div class="card card-stats">
+                  <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">attach_money</i>
+                      </div>
+                      <p class="card-category">Gastos</p>
+                      <h3 class="card-title">S/ {{montoCompras}} </h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <!--<i class="material-icons">local_offer</i> Tracked from Github-->
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+      <div class="row">
+          <div class="col-md-4">
+              <div class="card card-chart">
+                  <div class="card-header card-header-success">
+                  </div>
+                  <div class="card-body">
+                      <h4 class="card-title">Productos más vendidos</h4>
+                      <div id="barChartContent"><canvas id="canvas"></canvas></div>
+                     <!--<p class="card-category">
+                          <span class="text-success"><i class="fa fa-long-arrow-up"></i> </span></p>-->
+                  </div>
+                  <!--<div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">access_time</i> updated 4 minutes ago
+                      </div>
+                  </div>-->
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="card card-chart">
+                  <div class="card-header card-header-warning">
+                      <div class="ct-chart" id="websiteViewsChart"></div>
+                  </div>
+                  <div class="card-body">
+                      <h4 class="card-title">Clientes más compradores</h4>
+                      <div id="barChartContent2"><canvas id="canvas2"></canvas></div>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                        <!--  <i class="material-icons">access_time</i> campaign sent 2 days ago-->
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="card card-chart">
+                  <div class="card-header card-header-danger">
+                      <div class="ct-chart" id="completedTasksChart"></div>
+                  </div>
+                  <div class="card-body">
+                      <h4 class="card-title">Ventas por sucursal</h4>
+                      <div id="barChartContent3"><canvas id="canvas3"></canvas></div>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <!--<i class="material-icons">access_time</i> campaign sent 2 days ago-->
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card card-chart">
+                <div class="card-header card-header-danger">
+                    <div class="ct-chart" id="completedTasksChart"></div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Compras por día</h4>
+                    <div id="barChartContent4"><canvas id="canvas4"></canvas></div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <!--<i class="material-icons">access_time</i> campaign sent 2 days ago-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card card-chart">
+                <div class="card-header card-header-danger">
+                    <div class="ct-chart" id="completedTasksChart"></div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Ventas por día</h4>
+                    <div id="barChartContent5"><canvas id="canvas5"></canvas></div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <!--<i class="material-icons">access_time</i> campaign sent 2 days ago-->
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    <!--  <div class="row">
+          <div class="col-lg-6 col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-tabs card-header-primary">
+                      <div class="nav-tabs-navigation">
+                          <div class="nav-tabs-wrapper">
+                              <span class="nav-tabs-title">Tasks:</span>
+                              <ul class="nav nav-tabs" data-tabs="tabs">
+                                  <li class="nav-item">
+                                      <a mat-button class="nav-link active" href="#profile" data-toggle="tab">
+                                          <i class="material-icons">bug_report</i> Bugs
+                                          <div class="ripple-container"></div>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a mat-button class="nav-link" href="#messages" data-toggle="tab">
+                                          <i class="material-icons">code</i> Website
+                                          <div class="ripple-container"></div>
+                                      </a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a mat-button class="nav-link" href="#settings" data-toggle="tab">
+                                          <i class="material-icons">cloud</i> Server
+                                          <div class="ripple-container"></div>
+                                      </a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <div class="tab-content">
+                          <div class="tab-pane active" id="profile">
+                              <table class="table">
+                                  <tbody>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="" checked>
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="">
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="">
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                          </td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="" checked>
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Create 4 Invisible User Experiences you Never Knew About</td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                          <div class="tab-pane" id="messages">
+                              <table class="table">
+                                  <tbody>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="" checked>
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                          </td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="">
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                          <div class="tab-pane" id="settings">
+                              <table class="table">
+                                  <tbody>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="">
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="" checked>
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                          </td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                              <div class="form-check">
+                                                  <label class="form-check-label">
+                                                      <input class="form-check-input" type="checkbox" value="" checked>
+                                                      <span class="form-check-sign">
+                                                          <span class="check"></span>
+                                                      </span>
+                                                  </label>
+                                              </div>
+                                          </td>
+                                          <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                          <td class="td-actions text-right">
+                                              <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">edit</i>
+                                              </button>
+                                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                  <i class="material-icons">close</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-warning">
+                      <h4 class="card-title">Employees Stats</h4>
+                      <p class="card-category">New employees on 15th September, 2016</p>
+                  </div>
+                  <div class="card-body table-responsive">
+                      <table class="table table-hover">
+                          <thead class="text-warning">
+                              <th>ID</th>
+                              <th>Name</th>
+                              <th>Salary</th>
+                              <th>Country</th>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>1</td>
+                                  <td>Dakota Rice</td>
+                                  <td>$36,738</td>
+                                  <td>Niger</td>
+                              </tr>
+                              <tr>
+                                  <td>2</td>
+                                  <td>Minerva Hooper</td>
+                                  <td>$23,789</td>
+                                  <td>Curaçao</td>
+                              </tr>
+                              <tr>
+                                  <td>3</td>
+                                  <td>Sage Rodriguez</td>
+                                  <td>$56,142</td>
+                                  <td>Netherlands</td>
+                              </tr>
+                              <tr>
+                                  <td>4</td>
+                                  <td>Philip Chaney</td>
+                                  <td>$38,735</td>
+                                  <td>Korea, South</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>-->
+
+
+
+  <div class="card-body">
+
+    <mat-card>
+        <h3>Reporte por Items</h3><hr>
+        <button type="button"  class="enviar"  (click)="enviaExcel()"  mat-raised-button color="primary"  cdkFocusInitial><i class="material-icons">search</i> Exportar Excel</button>
+
+
+    <mat-table  [dataSource]="dataSource"  matSort #empTbSort="matSort">
+        <!--  Columna ID-->
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <a mat-stroked-button (click)="abrirEditar(row)">{{row.id}}</a>
+                 </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="fecha_registro">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.fecha_registro}} </mat-cell>
+</ng-container>
+  <ng-container matColumnDef="num_documento">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Documento</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.num_documento}} </mat-cell>
+</ng-container>
+  <ng-container matColumnDef="nombre">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Razón social</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.nombre}} </mat-cell>
+</ng-container>
+ <ng-container matColumnDef="codigo">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Código</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.codigo}} </mat-cell>
+</ng-container>
+      <ng-container matColumnDef="producto">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Producto</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.producto}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="cantidad">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.cantidad}}</mat-cell>
+</ng-container>
+  <ng-container matColumnDef="unidad">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Unidad</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.unidad}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="precio">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Precio</mat-header-cell>
+    <mat-cell *matCellDef="let row">S/ {{row.precio | number:'1.2-2'}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="valor_total">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
+    <mat-cell *matCellDef="let row">S/ {{row.valor_total | number:'1.2-2' }}</mat-cell>
+</ng-container>
+    <ng-container matColumnDef="Ingreso">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Movimiento</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.Ingreso}}</mat-cell>
+</ng-container>
+   <ng-container matColumnDef="observacion">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Observación</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.observacion}} </mat-cell>
+    </ng-container>
+       <ng-container matColumnDef="usuario">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.usuario}} </mat-cell>
+    </ng-container>
+        <!--<ng-container matColumnDef="sucursal">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Tienda</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.sucursal}} </mat-cell>
+    </ng-container>-->
+
+
+          <!-- Columna Nacionalidad -->
+
+        <mat-header-row *matHeaderRowDef="displayedColumns" class="encabezado"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"  (click)="selected(row)" [ngClass]="{'highlighted': selectedRowIndex == row}"
+        (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"></mat-row>
+
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" [pageSize]="10" [showFirstLastButtons]></mat-paginator>
+    </mat-card>
+</div>
+
+<div class="card-body">
+
+    <mat-card>
+        <h3>Reporte de Ingresos</h3><hr>
+        <button type="button"  class="enviar"  (click)="enviaExcelCaja()"  mat-raised-button color="primary"  cdkFocusInitial><i class="material-icons">search</i> Exportar Excel</button>
+
+
+    <mat-table  [dataSource]="dataSourceCaja"  matSort #empTbSortcaja="matSort">
+        <!--  Columna ID-->
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <a mat-stroked-button (click)="abrirEditar(row)">{{row.id}}</a>
+                   <button mat-icon-button color="primary" (click)="openPDF(row)" [disabled]="row.Ingreso === Salida" aria-label="Example icon button with a menu icon">
+            <i class="material-icons">download</i>
+          </button>
+                 </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="fecha">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.fecha}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="sucursal">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Sucursal</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.sucursal}}</mat-cell>
+</ng-container>
+
+<ng-container matColumnDef="Ingreso">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Movimiento</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.Ingreso}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="tipopago">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Tipo de pago</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.tipopago}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="nombre">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Cuenta</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.nombre}}</mat-cell>
+</ng-container>
+    <ng-container matColumnDef="monto">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Monto</mat-header-cell>
+
+      <mat-cell *matCellDef="let row">S/ {{row.monto | number:'1.2-2' }}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="monto_pendiente">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Monto pendiente</mat-header-cell>
+
+    <mat-cell *matCellDef="let row">S/ {{row.monto_pendiente | number:'1.2-2' }}</mat-cell>
+</ng-container>
+ 
+       <ng-container matColumnDef="usuario">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.usuario}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="fecha_registro">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.fecha_registro}} </mat-cell>
+    </ng-container>
+          <!-- Columna Nacionalidad -->
+
+        <mat-header-row *matHeaderRowDef="displayedCaja" class="encabezado"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedCaja;"  (click)="selected(row)" [ngClass]="{'highlighted': selectedRowIndex == row}"
+        (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"></mat-row>
+
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" [pageSize]="10" [showFirstLastButtons]></mat-paginator>
+    </mat-card>
+</div>
+  <div class="card-body">
+
+    <mat-card>
+        <h3>Ranking cliente comprador</h3><hr>
+        <button type="button"  class="enviar" (click)="enviaExcel()" mat-raised-button color="primary"  cdkFocusInitial><i class="material-icons">search</i> Exportar Excel</button>
+
+
+    <mat-table  [dataSource]="dataClienteRank"  matSort #empTbSortcliente="matSort">
+        <!--  Columna ID-->
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <a mat-stroked-button (click)="abrirEditar(row)">{{row.id}}</a>
+                 </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre/Razón social</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.nombre}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="total">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Total</mat-header-cell>
+    <mat-cell *matCellDef="let row">S/ {{row.total | number:'1.2-2'}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="pendiente">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Pendiente</mat-header-cell>
+    <mat-cell *matCellDef="let row">S/ {{row.pendiente | number:'1.2-2'}}</mat-cell>
+</ng-container>
+<ng-container matColumnDef="pedidos">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Pedidos</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.pedidos}}</mat-cell>
+</ng-container>
+
+          <!-- Columna Nacionalidad -->
+
+        <mat-header-row *matHeaderRowDef="displayedClientes" class="encabezado"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedClientes;"  (click)="selected(row)" [ngClass]="{'highlighted': selectedRowIndex == row}"
+        (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"></mat-row>
+
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" [pageSize]="10" [showFirstLastButtons]></mat-paginator>
+    </mat-card>
+</div>
+</div>

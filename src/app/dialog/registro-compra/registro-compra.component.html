@@ -1,0 +1,142 @@
+
+<form [formGroup]="MyForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div mat-dialog-content>
+             <div class="row">
+            <div class="col-10"><h1 mat-dialog-title>Registro de Compra</h1></div>
+            <div class="col-2"> <button class="close" mat-button mat-dialog-title (click)="cancelar() ">x</button></div>
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Tipo de Documento</mat-label>
+                    <mat-select name="id_documento" formControlName="tipoDoc" required>
+                        <mat-option >Seleccionar</mat-option>
+                        <mat-option (click)="cambiaTicket('Ticket')" value="Ticket">Ticket</mat-option>
+                        <mat-option (click)="cambiaTicket('Boleta')" value="Boleta">Boleta</mat-option>
+                        <mat-option (click)="cambiaTicket('Factura')" value="Factura">Factura</mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Serie Doc.</mat-label>
+                    <input matInput  name="seriedoc" formControlName="seriedoc"  type="text" placeholder="Serie doc">
+
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nro Documento</mat-label>
+                    <input matInput  name="nrodocumento" formControlName="nrodocumento"  type="number" autocomplete="off" placeholder="Numero de Documento">
+
+                </mat-form-field>
+
+            </div>
+            <div class="col-4">
+                <!--<input matInput class="form-control" placeholder="Buscar categoria..">-->
+                <mat-form-field appearance="outline">
+                    <mat-label>Proveedor</mat-label>
+                    <mat-select name="id_cliente" formControlName="proveedor">
+                        <input matInput class="buscador" (keyup)="onKey($event.target.value)" placeholder="Buscar por nombre o RUC">
+                        <mat-option  value="">Seleccionar</mat-option>
+                        <mat-option *ngFor="let prov of dataProveedores" [value]="prov.id">{{prov.razon_social}} - {{prov.num_documento}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Fecha de compra</mat-label>
+                    <input name="fecha" formControlName="fecha"  matInput [matDatepicker]="picker">
+                 <!--  <mat-hint>DD/MM/YYYY</mat-hint>-->
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Almacen Destino</mat-label>
+                    <mat-select  formControlName="almacen" required [(ngModel)]="sucursalselect">
+                      <mat-option *ngFor="let suc of dataSucursales" [value]="suc.id" >{{suc.nombre}}</mat-option>
+                     </mat-select>
+                  </mat-form-field>
+            </div>
+            <div formArrayName="pagos" style="width:98%;">
+        <div class="row" *ngFor="let pag of Pagos.controls; let i = index" [formGroupName]="i" >
+            <div class="col-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Forma de pago</mat-label>
+                    <mat-select name="tipoPago" formControlName="tipoPago"  required>
+                        <mat-option value="">Seleccionar</mat-option>
+                        <mat-option *ngFor="let med of dataMedios" [value]="med.id">{{med.nombre}}</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+            </div>
+            <div class="col-2">
+            <mat-form-field appearance="outline">
+                <mat-label>A la cuenta</mat-label>
+                <mat-select name="cuentaPago" formControlName="cuentaPago" required>
+                    <mat-option value="">Seleccionar</mat-option>
+                    <mat-option *ngFor="let caj of dataCajas" [value]="caj.id">{{caj.nombre}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            </div>
+            <div class="col-2">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nro Operación</mat-label>
+                    <input matInput name="numero" formControlName="numero" type="text">
+                </mat-form-field>
+                </div>
+            <div class="col-2">
+                <mat-form-field appearance="outline">
+                    <mat-label>Monto Pagado</mat-label>
+                    <input matInput name="montoRecibido" formControlName="montoPago" mask="separator.2" prefix="S/ " (focusout)="cambiaVuelto(data.precio)"  value="0"  type="text" required>
+                </mat-form-field>
+                </div>
+                <div class="col-3">
+                    <button mat-icon-button color="warn" *ngIf="i==0"  (click)="onAddToPago()">
+                        <i class="material-icons">add_circle</i>
+                    </button>
+                    <button  mat-icon-button color="warn" *ngIf="i>0"  (click)="onDeletePago(i)">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </div>
+            </div>
+            </div>
+            <div class="col-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Total</mat-label>
+                <input matInput  name="vuelto" mask="separator.2" prefix="S/ " formControlName="total" type="text" readonly>
+            </mat-form-field>
+                </div>
+            <div class=" col-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{vuelto}}</mat-label>
+                    <input    [ngClass]="{'claseVuelto': vuelto === 'Vuelto', 'clasePendiente' : vuelto === 'Pendiente' }" matInput  name="vuelto" mask="separator.2" prefix="S/ "  formControlName="vuelto"  type="text" placeholder="Precio">
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Comentario</mat-label>
+                    <textarea matInput placeholder="Comentario" formControlName="comentario"></textarea>
+                  </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <!--<mat-form-field appearance="outline">
+        <mat-label>Impresora</mat-label>
+        <mat-select name="impresoras" formControlName="impresoras" required>
+            <mat-option value="">Seleccionar</mat-option>
+            <mat-option *ngFor="let imp of impresoras" [value]="imp">{{imp}}</mat-option>
+    </mat-select>
+    </mat-form-field>-->
+    <div mat-dialog-actions class="float-right">
+        <!--<mat-slide-toggle color="primary" name="entrega" formControlName="entrega" (ngModelChange)="alerta()">Entrega Parcial</mat-slide-toggle>&nbsp;&nbsp;-->
+         <button mat-raised-button color="warn" mat-dialog-close (click)="cancelar()">Cancelar</button>&nbsp;
+        <button type="submit"  mat-raised-button color="primary"  [disabled]="!MyForm.valid"  cdkFocusInitial><i class="material-icons">save</i> Registrar</button>
+    </div>
+</form>
+
+
+<!--<pre>{{impresoras| json}}</pre>
+
+<pre>{{MyForm.value.pagos[0].montoPago | json}}</pre>-->

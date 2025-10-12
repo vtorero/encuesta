@@ -1,0 +1,119 @@
+  :root {
+        --gap: 16px;
+        --card-bg: #ffffff;
+        --border: #e3e7ee
+    }
+
+    .form-root {
+        max-width: 980px;
+        margin: 18px auto;
+        padding: 18px;
+        box-sizing: border-box;
+        font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue';
+    }
+
+    .form-title {
+        text-align: center;
+        margin-bottom: 12px
+    }
+
+    .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px;
+        margin-bottom: var(--gap)
+    }
+
+    .card h3 {
+        margin: 0 0 10px 0
+    }
+
+    .row {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 12px
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column
+    }
+
+    .field.wide {
+        grid-column: span 2
+    }
+
+    .field.small {
+        grid-column: span 1;
+        align-items: center
+    }
+
+    .label {
+        font-size: 0.9rem;
+        margin-bottom: 6px
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        font-size: 0.95rem
+    }
+
+    .radios {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap
+    }
+
+    .buttons {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end
+    }
+
+    button {
+        padding: 8px 14px;
+        border-radius: 8px;
+        border: 0;
+        cursor: pointer
+    }
+
+    button[disabled] {
+        opacity: 0.6;
+        cursor: not-allowed
+    }
+
+    .error {
+        color: #b00020;
+        font-size: 0.8rem
+    }
+
+    /* Responsive */
+    @media (max-width:900px) {
+        .row {
+            grid-template-columns: repeat(2, 1fr)
+        }
+
+        .field.wide {
+            grid-column: span 2
+        }
+    }
+
+    @media (max-width:560px) {
+        .row {
+            grid-template-columns: 1fr
+        }
+
+        .field.wide {
+            grid-column: auto
+        }
+
+        .buttons {
+            justify-content: stretch
+        }
+    }

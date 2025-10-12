@@ -1,0 +1,138 @@
+<!--
+  Archivo: angular18-formulario.component.html
+  Uso: Plantilla para un componente Angular 18 que usa Reactive Forms (FormGroup).
+  Requisitos en el TS del componente:
+    import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+    this.form = this.fb.group({ shortText: ['', Validators.required], longText: [''], gender: ['male'], category: [''], options: ['opt1'], accept: [false] });
+  Asegúrate de importar ReactiveFormsModule en tu módulo.
+-->
+
+<form [formGroup]="form" class="form-root" (ngSubmit)="onSubmit()" novalidate>
+    <h2 class="form-title">Encuesta</h2>
+    <p>Invitamos a los colaboradores del Banco de la Nacion que tengan interés en adquirir una vivienda en la ciudad de Lima, a responder la siguiente encuesta:</p>
+
+    <section class="card p-2">
+        <h3>1. Datos personales y laborales</h3>
+        <div class="row">
+            <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombres y Apellidos:</mat-label>
+                    <input matInput name="nombre" type="text"
+                        placeholder="Nombres y Apellidos" required>
+                </mat-form-field>
+            </div>
+            <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Edad:</mat-label>
+                    <input matInput name="nombre" maxlength="110" minlength="2" type="text"
+                        placeholder="Edad" required>
+                </mat-form-field>
+            </div>
+                <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Oficina del Banco de la Nación, donde labora (indicar: dirección y distrito
+      en Lima o provincia)</mat-label>
+                    <input matInput name="nombre" maxlength="110" minlength="2" type="text"
+                        placeholder="" required>
+                </mat-form-field>
+            </div>
+             <div class="col-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Sueldo mensual:</mat-label>
+                    <input matInput name="sueldo" maxlength="110" minlength="2" type="text"
+                        placeholder="Sueldo" required>
+                </mat-form-field>
+            </div>
+
+
+        </div>
+    </section>
+
+    <section class="card">
+        <h3>2. Dirección</h3>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Dirección:</mat-label>
+                <input matInput name="nombre" maxlength="110" minlength="2" type="text" placeholder="Nombre producto"
+                    required>
+            </mat-form-field>
+
+            <label class="field wide">
+                <span class="label">Dirección</span>
+                <input type="text" formControlName="address" placeholder="Calle, número, piso" />
+            </label>
+
+            <label class="field">
+                <span class="label">Ciudad</span>
+                <input type="text" formControlName="city" placeholder="Lima" />
+            </label>
+
+            <label class="field">
+                <span class="label">País</span>
+                <select formControlName="country">
+                    <option value="">Seleccione...</option>
+                    <option value="pe">Perú</option>
+                    <option value="mx">México</option>
+                    <option value="es">España</option>
+                    <option value="us">Estados Unidos</option>
+                </select>
+            </label>
+        </div>
+    </section>
+
+    <section class="card">
+        <h3>3. Preferencias</h3>
+        <div class="row">
+            <label class="field">
+                <span class="label">Categoría favorita</span>
+                <select formControlName="category">
+                    <option value="">-- Elige --</option>
+                    <option value="tech">Tecnología</option>
+                    <option value="home">Hogar</option>
+                    <option value="outdoor">Exterior</option>
+                </select>
+            </label>
+
+            <label class="field">
+                <span class="label">Opciones (checkbox → radio ejemplo)</span>
+                <div class="radios">
+                    <label><input type="radio" formControlName="options" value="opt1" /> Opción 1</label>
+                    <label><input type="radio" formControlName="options" value="opt2" /> Opción 2</label>
+                    <label><input type="radio" formControlName="options" value="opt3" /> Opción 3</label>
+                </div>
+            </label>
+
+            <label class="field">
+                <span class="label">¿Recibir notificaciones?</span>
+                <div class="switch">
+                    <label><input type="checkbox" formControlName="notifications" /> Sí, quiero</label>
+                </div>
+            </label>
+        </div>
+    </section>
+
+    <section class="card">
+        <h3>4. Comentarios</h3>
+        <div class="row">
+            <label class="field wide">
+                <span class="label">Comentarios</span>
+                <textarea formControlName="longText" rows="5" placeholder="Escribe aquí tus comentarios"></textarea>
+            </label>
+        </div>
+    </section>
+
+    <section class="card actions">
+        <label class="field small">
+            <input type="checkbox" formControlName="accept" /> Acepto los términos
+        </label>
+
+        <div class="buttons">
+            <button type="submit" [disabled]="form.invalid">Enviar</button>
+            <button type="button" (click)="onReset()">Limpiar</button>
+        </div>
+    </section>
+</form>
+
+<style>
+  
+</style>
