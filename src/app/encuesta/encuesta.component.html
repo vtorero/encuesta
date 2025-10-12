@@ -49,34 +49,41 @@
     </section>
 
     <section class="card">
-        <h3>2. Dirección</h3>
+        <h3>2. Dependientes o familiares que conforman el núcleo familiar</h3>
         <div class="row">
-            <mat-form-field appearance="outline">
-                <mat-label>Dirección:</mat-label>
-                <input matInput name="nombre" maxlength="110" minlength="2" type="text" placeholder="Nombre producto"
-                    required>
-            </mat-form-field>
-
-            <label class="field wide">
-                <span class="label">Dirección</span>
-                <input type="text" formControlName="address" placeholder="Calle, número, piso" />
-            </label>
-
-            <label class="field">
-                <span class="label">Ciudad</span>
-                <input type="text" formControlName="city" placeholder="Lima" />
-            </label>
-
-            <label class="field">
-                <span class="label">País</span>
-                <select formControlName="country">
-                    <option value="">Seleccione...</option>
-                    <option value="pe">Perú</option>
-                    <option value="mx">México</option>
-                    <option value="es">España</option>
-                    <option value="us">Estados Unidos</option>
-                </select>
-            </label>
+         <hr>
+            <div formArrayName="dependientes" style="margin-left:15px;">
+                <div *ngFor="let pag of Dependientes.controls; let i = index" [formGroupName]="i" >
+                    <div >
+                      <mat-form-field appearance="outline">
+                    <mat-label>Nombres y Apellidos:</mat-label>
+                    <input matInput name="nombres" type="text" formControlName="nombres"
+                        placeholder="Nombres y Apellidos" required>
+                </mat-form-field>
+                    </div>
+         
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Parentesco</mat-label>
+                    <input matInput name="parentesco" formControlName="parentesco" type="text" required>
+                </mat-form-field>
+                </div>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Edad</mat-label>
+                    <input matInput name="edad" formControlName="edad"  value="0"  type="text" required>
+                </mat-form-field>
+                </div>
+                <div>
+                                  <button mat-icon-button color="warn" *ngIf="i==0" (click)="onAddToPago()" [disabled]="habilitarPagos">
+                        <i class="material-icons">add_circle</i>
+                    </button>
+                    <button  mat-icon-button color="warn" *ngIf="i>0"  (click)="onDeletePago(i)">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </div>
+            </div>
+            </div>
         </div>
     </section>
 
