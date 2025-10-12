@@ -37,7 +37,7 @@
 
     .field {
         display: flex;
-        flex-direction: column
+        flex-direction: row
     }
 
     .field.wide {
@@ -92,6 +92,51 @@
         color: #b00020;
         font-size: 0.8rem
     }
+
+    /* ===== Sección 2: Dependientes ===== */
+section:nth-of-type(2) .row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* columnas principales */
+section:nth-of-type(2) .col-4,
+section:nth-of-type(2) .col-1 {
+  flex: 1;
+}
+
+section:nth-of-type(2) .col-1 {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ancho completo de los mat-form-field */
+section:nth-of-type(2) mat-form-field {
+  width: 100%;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  section:nth-of-type(2) .row {
+    flex-direction: column;  /* se apilan en columna */
+  }
+
+  section:nth-of-type(2) .col-4,
+  section:nth-of-type(2) .col-1 {
+    flex: 1 1 100%;          /* ocupan todo el ancho */
+  }
+
+  section:nth-of-type(2) .col-1 {
+    justify-content: flex-start; /* botón a la izquierda */
+    margin-top: -10px;
+  }
+}
+
+
 
     /* Responsive */
     @media (max-width:900px) {

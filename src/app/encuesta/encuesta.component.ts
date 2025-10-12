@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators,ReactiveFormsModule, FormArray } fro
 @Component({
   selector: 'encuesta',
   templateUrl: './encuesta.component.html',
-  styleUrls: ['./encuesta.component.css'],
+styleUrls: ['./encuesta.component.css'],
 })
 export class EncuestaComponent implements OnInit {
   form!: FormGroup;
@@ -21,7 +21,7 @@ export class EncuestaComponent implements OnInit {
       dependientes: this.fb.array([this.fb.group({
       nombres: ['', Validators.required],
       parentesco:['',Validators.required],
-      edad: [0, [Validators.required, Validators.min(0)]]
+      edad: ['', [Validators.required, Validators.min(0)]]
     })]),
       address: [''],
       city: [''],
