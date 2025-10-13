@@ -57,6 +57,7 @@ import { AddCategoriaComponent } from './dialog/add-categoria/add-categoria.comp
 import { AddSubCategoriaComponent } from './dialog/add-sub-categoria/add-sub-categoria.component';
 import { AddFamiliaComponent } from './dialog/add-familia/add-familia.component';
 import { EncuestaComponent } from './encuesta/encuesta.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 
@@ -71,6 +72,7 @@ import { EncuestaComponent } from './encuesta/encuesta.component';
     LoginModule,
     SharedModule,
     ComponentsModule,
+    MatRadioModule,
     NgxMaskModule.forRoot()
   ],
   declarations: [

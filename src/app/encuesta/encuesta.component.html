@@ -11,7 +11,7 @@
     <h2 class="form-title">Encuesta</h2>
     <p>Invitamos a los colaboradores del Banco de la Nacion que tengan interés en adquirir una vivienda en la ciudad de Lima, a responder la siguiente encuesta:</p>
 
-    <section class="card p-2">
+    <section class="card p-3">
         <h3>1. Datos personales y laborales</h3>
              <hr>
         <div class="row">
@@ -49,14 +49,14 @@
         </div>
     </section>
 
-    <section class="card">
+    <section class="card p-3">
         <h3>2. Dependientes o familiares que conforman el núcleo familiar</h3>
  
          <hr>
             <div  formArrayName="dependientes" style="margin-left:15px;">
                 <div  *ngFor="let pag of Dependientes.controls; let i = index" [formGroupName]="i" >
                     <div class="row">
-                    <div class="col-5">
+                    <div class="col-11 col-sm-5 ">
                       <mat-form-field appearance="outline">
                     <mat-label>Nombres y Apellidos:</mat-label>
                     <input matInput name="nombres" type="text" formControlName="nombres"
@@ -64,81 +64,167 @@
                 </mat-form-field>
                     </div>
          
-            <div class="col-3">
+            <div class="col-5 col-sm-3">
                 <mat-form-field appearance="outline">
                     <mat-label>Parentesco</mat-label>
                     <input matInput name="parentesco" formControlName="parentesco" type="text" required>
                 </mat-form-field>
                 </div>
-            <div class="col-2">
+            <div class="col-3 col-sm-2">
                 <mat-form-field appearance="outline">
                     <mat-label>Edad</mat-label>
                     <input matInput name="edad" formControlName="edad"  type="text" required>
                 </mat-form-field>
                 </div>
                 <div class="col-1">
-                                  <button mat-icon-button color="warn" *ngIf="i==0" (click)="onAddToPago()" [disabled]="habilitarPagos">
+                    <button mat-raised-button color="warn" *ngIf="i==0"  (click)="onAddToDependiente()">Agregar</button>
+                    <!--<button mat-icon-button color="warn" *ngIf="i==0" (click)="onAddToPago()" [disabled]="habilitarPagos">
                         <i class="material-icons">add_circle</i>
-                    </button>
-                    <button  mat-icon-button color="warn" *ngIf="i>0"  (click)="onDeletePago(i)">
+                    </button>-->
+                    <button  mat-icon-button color="warn" *ngIf="i>0"  (click)="onDeleteDependiente(i)">
                         <i class="material-icons">delete</i>
                     </button>
                 </div>
                 </div>
+                <hr>
             </div>
             </div>
        
     </section>
 
-    <section class="card">
-        <h3>3. Preferencias</h3>
+
+    <section class="card p-3">
+        <h3>3. Cuadro de ingresos familiares</h3>
+ 
+         <hr>
+            <div  formArrayName="aportantes" style="margin-left:15px;">
+                <div  *ngFor="let pag of Aportantes.controls; let i = index" [formGroupName]="i" >
+                    <div class="row">
+                    <div class="col-8 col-sm-4">
+                      <mat-form-field appearance="outline">
+                    <mat-label>Nombres y Apellidos:</mat-label>
+                    <input matInput name="nombres" type="text" formControlName="nombres"
+                        placeholder="Nombres y Apellidos" required>
+                </mat-form-field>
+                    </div>
+            <div class="col-3 col-sm-2">
+                <mat-form-field appearance="outline">
+                    <mat-label>Edad</mat-label>
+                    <input matInput name="edad" formControlName="edad"  type="text" required>
+                </mat-form-field>
+                </div>
+            <div class="col-4 col-sm-2">
+                <mat-form-field appearance="outline">
+                    <mat-label>Aporte Mensual</mat-label>
+                    <input matInput name="monto" formControlName="monto" type="text" required>
+                </mat-form-field>
+                </div>
+            <div class="col-5 col-sm-2">
+                <mat-form-field appearance="outline">
+                    <mat-label>Centro de Trabajo</mat-label>
+                    <input matInput name="compania" formControlName="compania" type="text" required>
+                </mat-form-field>
+                </div>
+                <div class="col-1">
+                    <button mat-raised-button color="warn" *ngIf="i==0"  (click)="onAddToAportante()">Agregar</button>
+                    <!--<button mat-icon-button color="warn" *ngIf="i==0" (click)="onAddToPago()" [disabled]="habilitarPagos">
+                        <i class="material-icons">add_circle</i>
+                    </button>-->
+                    <button  mat-icon-button color="warn" *ngIf="i>0"  (click)="onDeleteAportante(i)">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </div>
+                </div>
+                <hr>
+            </div>
+            </div>
+       
+    </section>
+
+    <section class="card p-3">
+        <h3>4. Elija un tipo de vivienda preferido</h3>
         <div class="row">
-            <label class="field">
-                <span class="label">Categoría favorita</span>
-                <select formControlName="category">
-                    <option value="">-- Elige --</option>
-                    <option value="tech">Tecnología</option>
-                    <option value="home">Hogar</option>
-                    <option value="outdoor">Exterior</option>
-                </select>
-            </label>
+            
 
-            <label class="field">
-                <span class="label">Opciones (checkbox → radio ejemplo)</span>
-                <div class="radios">
-                    <label><input type="radio" formControlName="options" value="opt1" /> Opción 1</label>
-                    <label><input type="radio" formControlName="options" value="opt2" /> Opción 2</label>
-                    <label><input type="radio" formControlName="options" value="opt3" /> Opción 3</label>
-                </div>
-            </label>
 
-            <label class="field">
-                <span class="label">¿Recibir notificaciones?</span>
-                <div class="switch">
-                    <label><input type="checkbox" formControlName="notifications" /> Sí, quiero</label>
+                    <div class="col-12">
+
+                  <mat-radio-button value="tipoA"><label> Departamento de dos dormitorios, tipo A (55 m2) S/ 374,000</label></mat-radio-button>
+                    </div>
+                    <div class="col-12">
+                    <mat-radio-button value="tipoB"><label> Departamento de dos dormitorios, tipo B (62 m2) S/ 421,000</label></mat-radio-button>
+                    </div>
+                    <div class="col-12">
+                    <mat-radio-button value="tipoC"><label> Departamento de tres dormitorios, tipo C (72 n2) S/ 489,600</label></mat-radio-button>
+                    </div>
+                    <div class="col-12">
+                    <mat-radio-button value="tipoD"><label> Departamento de tres dormitorios, tipo D (80 m2) S/ 544,000</label></mat-radio-button>
+                    </div>
                 </div>
-            </label>
+
+
+      
+       
+    </section>
+
+    <section class="card p-3">
+        <h3>5. Elija un esquema de pago tentativo (en cuotas mensuales)</h3>
+        <div class="row">
+        <div class="col-sm-3">
+    <table border="1">
+        <tr><td>TIPO: A</td><td>S/374,000</td></tr>
+        <tr><td>Cuota Inicial</td><td>S/ 74,800</td></tr>
+        <tr><td>Saldo </td><td>S/ 299,200</td></tr>
+        <tr><td colspan="2" style="text-align: center;">Coutas</td></tr>
+        <tr><td>20 años </td><td>S/2,308.23</td></tr>
+        <tr><td>25 años </td><td>2,153.22</td></tr>
+        <tr><td colspan="2" style="text-align: center;"><mat-radio-button value="tipoA"></mat-radio-button></td></tr>
+    </table>
+        </div>
+       
+    <div class="col-sm-3">
+    <table border="1">
+        <tr><td>TIPO: A</td><td>S/374,000</td></tr>
+        <tr><td>Cuota Inicial</td><td>S/ 74,800</td></tr>
+        <tr><td>Saldo </td><td>S/ 299,200</td></tr>
+        <tr><td colspan="2" style="text-align: center;">Coutas</td></tr>
+        <tr><td>20 años </td><td>S/2,308.23</td></tr>
+        <tr><td>25 años </td><td>2,153.22</td></tr>
+        <tr><td colspan="2" style="text-align: center;"><mat-radio-button value="tipoA"></mat-radio-button></td></tr>
+    </table>
+        </div>
+        
+              <div class="col-sm-3">
+    <table border="1">
+        <tr><td>TIPO: A</td><td>S/374,000</td></tr>
+        <tr><td>Cuota Inicial</td><td>S/ 74,800</td></tr>
+        <tr><td>Saldo </td><td>S/ 299,200</td></tr>
+        <tr><td colspan="2" style="text-align: center;">Coutas</td></tr>
+        <tr><td>20 años </td><td>S/2,308.23</td></tr>
+        <tr><td>25 años </td><td>2,153.22</td></tr>
+        <tr><td colspan="2" style="text-align: center;"><mat-radio-button value="tipoA"></mat-radio-button></td></tr>
+    </table>
+        </div>
+       
+              <div class="col-sm-3">
+    <table border="1">
+        <tr><td>TIPO: A</td><td>S/374,000</td></tr>
+        <tr><td>Cuota Inicial</td><td>S/ 74,800</td></tr>
+        <tr><td>Saldo </td><td>S/ 299,200</td></tr>
+        <tr><td colspan="2" style="text-align: center;">Coutas</td></tr>
+        <tr><td>20 años </td><td>S/2,308.23</td></tr>
+        <tr><td>25 años </td><td>2,153.22</td></tr>
+        <tr><td colspan="2" style="text-align: center;"><mat-radio-button value="tipoA"></mat-radio-button></td></tr>
+    </table>
+        </div>
+   
         </div>
     </section>
 
-    <section class="card">
-        <h3>4. Comentarios</h3>
-        <div class="row">
-            <label class="field wide">
-                <span class="label">Comentarios</span>
-                <textarea formControlName="longText" rows="5" placeholder="Escribe aquí tus comentarios"></textarea>
-            </label>
-        </div>
-    </section>
-
-    <section class="card actions">
-        <label class="field small">
-            <input type="checkbox" formControlName="accept" /> Acepto los términos
-        </label>
-
+    <section class="card actions p-3">
         <div class="buttons">
-            <button type="submit" [disabled]="form.invalid">Enviar</button>
-            <button type="button" (click)="onReset()">Limpiar</button>
+             <button mat-raised-button color="warn" [disabled]="form.invalid">Enviar</button>
+             <button mat-raised-button color="warn" (click)="onReset()">Limpiar</button>
         </div>
     </section>
 </form>

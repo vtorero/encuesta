@@ -1,6 +1,5 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators,ReactiveFormsModule, FormArray } from '@angular/forms';
 
 @Component({
@@ -15,6 +14,10 @@ export class EncuestaComponent implements OnInit {
    get Dependientes() {
       return this.form.get('dependientes') as FormArray;
     }
+   get Aportantes() {
+      return this.form.get('aportantes') as FormArray;
+    }
+
   ngOnInit(): void {
     this.form = this.fb.group({
       shortText: ['', Validators.required],
@@ -22,6 +25,12 @@ export class EncuestaComponent implements OnInit {
       nombres: ['', Validators.required],
       parentesco:['',Validators.required],
       edad: ['', [Validators.required, Validators.min(0)]]
+    })]),
+    aportantes: this.fb.array([this.fb.group({
+      nombres: ['', Validators.required],
+      edad: ['', [Validators.required, Validators.min(0)]],
+      monto: ['', [Validators.required, Validators.min(0)]],
+      compania: ['', Validators.required],
     })]),
       address: [''],
       city: [''],
@@ -42,7 +51,7 @@ export class EncuestaComponent implements OnInit {
       this.form.markAllAsTouched();
     }
   }
-onAddToPago():void{
+onAddToDependiente():void{
   const PagoGroup = this.fb.group({
 		nombres: ['', Validators.required],
     parentesco:['',Validators.required],
@@ -51,9 +60,24 @@ onAddToPago():void{
 	this.Dependientes.push(PagoGroup);
 }
 
-onDeletePago(index:number):void{
+onAddToAportante():void{
+  const AportGroup = this.fb.group({
+      nombres: ['', Validators.required],
+      edad: ['', [Validators.required, Validators.min(0)]],
+      monto: ['', [Validators.required, Validators.min(0)]],
+      compania: ['', Validators.required],
+	});
+	this.Aportantes.push(AportGroup);
+}
+
+onDeleteDependiente(index:number):void{
   this.Dependientes.removeAt(index);
 }
+
+onDeleteAportante(index:number):void{
+  this.Aportantes.removeAt(index);
+}
+
 
   onReset(): void {
     this.form.reset({
