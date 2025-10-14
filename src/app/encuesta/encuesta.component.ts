@@ -20,7 +20,10 @@ export class EncuestaComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      shortText: ['', Validators.required],
+      nombre:['', Validators.required],
+      edad:['', Validators.required],
+      oficina:['', Validators.required],
+      sueldo:['', Validators.required],
       dependientes: this.fb.array([this.fb.group({
       nombres: ['', Validators.required],
       parentesco:['',Validators.required],
@@ -32,14 +35,8 @@ export class EncuestaComponent implements OnInit {
       monto: ['', [Validators.required, Validators.min(0)]],
       compania: ['', Validators.required],
     })]),
-      address: [''],
-      city: [''],
-      country: [''],
-      category: [''],
-      options: ['opt1'],
-      notifications: [false],
-      longText: [''],
-      accept: [false, Validators.requiredTrue]
+            tipo:['', Validators.required],
+            esquema:['', Validators.required],
     });
   }
 

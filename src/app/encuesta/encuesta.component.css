@@ -13,7 +13,16 @@
     }
 
 
-    label {text-wrap: auto;
-    font-size: 19px !important;
+    .label  {text-wrap: auto;
+    font-size: 16px !important;
     color: #555
     }
+
+    .cabecera{
+
+    background-image: url("../../assets/img/feban-logo.png");
+    background-repeat: no-repeat;
+    font-size: 17px;
+    font-weight: bold;
+}
+    

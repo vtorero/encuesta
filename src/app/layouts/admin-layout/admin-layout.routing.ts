@@ -8,27 +8,7 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import { AccesosComponent } from '../../login/accesos/accesos.component';
-import { ProductosComponent } from '../../inventarios/productos/productos.component';
-import { SeguridadComponent } from '../../seguridad/seguridad/seguridad.component';
-import { UsuarioComponent } from '../../seguridad/usuario/usuario.component';
-import { SucursalesComponent } from '../../seguridad/sucursales/sucursales.component';
-import { ProveedoresComponent } from '../../proveedores/proveedores.component';
-import { ClienteComponent } from '../../negocio/cliente/cliente.component';
-import { VentasComponent } from 'app/negocio/ventas/ventas.component';
-import { MainInventarioComponent } from '../../inventarios/main-inventario/main-inventario.component';
-import { ListadoComponent } from '../../negocio/ventas/listado/listado.component';
-import { MainComponent } from 'app/negocio/ventas/main/main.component';
-import { ConfiguracionComponent } from '../../seguridad/configuracion/configuracion.component';
-import { permisosComponent } from '../../seguridad/permisos/permisos.component';
-import { CajasComponent } from 'app/seguridad/cajas/cajas.component';
-import { KardexComponent } from 'app/inventarios/kardex/kardex.component';
-import { ComprasComponent } from 'app/negocio/compras/compras.component';
-import { ComprasRegistroComponent } from 'app/negocio/compras/compras-registro/compras-registro.component';
-import { ListadoComprasComponent } from 'app/negocio/compras/listado-compras/listado-compras.component';
-import { VendedoresComponent } from '../../negocio/vendedores/vendedores.component';
-import { AuthGuard } from 'app/seguridad/auth/auth.guards';
-import { ModoPagoComponent } from '../../seguridad/modo-pago/modo-pago.component';
+
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -74,40 +54,11 @@ export const AdminLayoutRoutes: Routes = [
     //     }]
     // }
     { path: 'dashboard', component: DashboardComponent,
-    canActivate: [ AuthGuard ],
-    canMatch: [ AuthGuard ]
+ 
   },
-    {path:'ventas',
-    children:[{path:'main',component:ListadoComponent},
-   // {path:'listado',component:ListadoComponent},
-    {path:'venta-rapida',component:VentasComponent},
-    { path: 'clientes', component: ClienteComponent }]},
-    {path:'compras',
-    children:[{path:'main',component:ListadoComprasComponent,
-    /*canActivate: [ AuthGuard ],
-    canMatch: [ AuthGuard ]*/
-  },
-    {path:'listado',component:ListadoComprasComponent},
-    {path:'registro-compras',component:ComprasRegistroComponent},
-    { path: 'proveedores', component: ProveedoresComponent,
-   /* canActivate: [ AuthGuard ],
-canMatch: [ AuthGuard ]*/ }]},
-    {path:'configuracion',
-    children:[{path:'main',component:ConfiguracionComponent}
-    ,{path:'permisos',component:permisosComponent},
-    {path:'cajas',component:CajasComponent},
-    {path:'pagos',component:ModoPagoComponent}]},
-      {path:'inventarios',component:MainInventarioComponent},
-      {path:'kardex',component:KardexComponent,
-      canActivate: [ AuthGuard ],
-      canMatch: [ AuthGuard ]},
-    { path: 'seguridad',      component: UsuarioComponent,
-    canActivate: [ AuthGuard ],
-    canMatch: [ AuthGuard ] },
-    { path: 'usuarios',      component: UsuarioComponent },
-    { path: 'sucursales',      component: SucursalesComponent },
-    { path: 'vendedores',      component: VendedoresComponent },
-    { path: 'productos',      component: ProductosComponent },
+    
+   
+   
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
     { path: 'typography',     component: TypographyComponent },

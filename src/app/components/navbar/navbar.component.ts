@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
-import { SelectImpresoraComponent } from '../../dialog/select-impresora/select-impresora.component';
+
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -43,12 +43,7 @@ cerrar(){
 
 openImpresora(enterAnimationDuration: string, exitAnimationDuration:string){
 
-    const dialogo2=this.dialog.open(SelectImpresoraComponent,{width: 'auto',enterAnimationDuration,exitAnimationDuration, data: {},
-    });
-     dialogo2.afterClosed().subscribe(ux => {
-       console.log("ssssssssss",ux)
-
-     });
+    
     }
 
 

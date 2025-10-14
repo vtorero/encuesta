@@ -7,9 +7,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Global } from '../global';
 import { Venta } from 'app/modelos/venta';
-import { VerVentaComponent } from 'app/negocio/ventas/ver-venta/ver-venta.component';
+
 import { MatDialog } from '@angular/material/dialog';
-import { VerCompraComponent } from '../negocio/compras/ver-compra/ver-compra.component';
+
 
 function sendInvoice(data,url) {
   fetch(url, {
@@ -354,17 +354,7 @@ this.api.descargarFactura(cod['id']) // id de factura
 
     abrirEditar(cod: Venta) {
       console.log(cod['Ingreso']);
-      if(cod['Ingreso']=='Ingreso'){
-      const dialogo2 = this.dialog2.open(VerVentaComponent, {
-        data: cod,
-        disableClose: false
-      });
-    }
-    if(cod['Ingreso']=='Salida'){
-      const dialogo2 = this.dialog2.open(VerCompraComponent, {
-        data: cod,
-        disableClose: false
-      });
-    }
+
+
     }
 }
