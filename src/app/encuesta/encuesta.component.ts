@@ -25,15 +25,15 @@ export class EncuestaComponent implements OnInit {
       oficina:['', Validators.required],
       sueldo:['', Validators.required],
       dependientes: this.fb.array([this.fb.group({
-      nombres: ['', Validators.required],
-      parentesco:['',Validators.required],
-      edad: ['', [Validators.required, Validators.min(0)]]
+      nombres: [''],
+      parentesco:[''],
+      edad: ['']
     })]),
     aportantes: this.fb.array([this.fb.group({
-      nombres: ['', Validators.required],
-      edad: ['', [Validators.required, Validators.min(0)]],
-      monto: ['', [Validators.required, Validators.min(0)]],
-      compania: ['', Validators.required],
+      nombres: [''],
+      edad: [''],
+      monto: [''],
+      compania: [''],
     })]),
             tipo:['', Validators.required],
             esquema:['', Validators.required],

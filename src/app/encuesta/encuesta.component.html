@@ -11,7 +11,7 @@
     <div class="cabecera">
     <div class="row">
         <div class="col-12 col-sm-4">
-            <img src="encuesta/assets/img/feban-logo.png">
+            <img src="/assets/img/feban-logo.png">
         </div>
         <div class="col-12 col-sm-8">
         <p>Invitamos a los colaboradores del Banco de la Nacion que tengan interés en adquirir una vivienda en la ciudad de Lima, a responder la siguiente encuesta:</p>
@@ -22,21 +22,21 @@
         <h3>1. Datos personales y laborales</h3>
              <hr>
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 col-sm-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Nombres y Apellidos:</mat-label>
                     <input matInput name="nombre" formControlName="nombre" type="text"
                         placeholder="Nombres y Apellidos" required>
                 </mat-form-field>
             </div>
-            <div class="col-12">
+            <div class="col-12 col-sm-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Edad:</mat-label>
                     <input matInput name="edad" maxlength="110"  formControlName="edad" minlength="2" type="text"
                         placeholder="Edad" required>
                 </mat-form-field>
             </div>
-                <div class="col-12">
+                <div class="col-12 col-sm-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Oficina del Banco de la Nación, donde labora (indicar: dirección y distrito
       en Lima o provincia)</mat-label>
@@ -44,7 +44,7 @@
                         placeholder="" required>
                 </mat-form-field>
             </div>
-             <div class="col-12">
+             <div class="col-12 col-sm-6">
                 <mat-form-field appearance="outline">
                     <mat-label>Sueldo mensual:</mat-label>
                     <input matInput name="sueldo" formControlName="sueldo" maxlength="110" minlength="2" type="text"
@@ -63,31 +63,31 @@
             <div  formArrayName="dependientes" style="margin-left:15px;">
                 <div  *ngFor="let pag of Dependientes.controls; let i = index" [formGroupName]="i" >
                     <div class="row">
-                    <div class="col-11 col-sm-5 ">
+                    <div class="col-7 col-sm-4 ">
                       <mat-form-field appearance="outline">
                     <mat-label>Nombres y Apellidos:</mat-label>
                     <input matInput name="nombres" type="text" formControlName="nombres"
-                        placeholder="Nombres y Apellidos" required>
+                        placeholder="Nombres y Apellidos" >
                 </mat-form-field>
                     </div>
          
             <div class="col-5 col-sm-3">
                 <mat-form-field appearance="outline">
                     <mat-label>Parentesco</mat-label>
-                    <input matInput name="parentesco" formControlName="parentesco" type="text" required>
+                    <input matInput name="parentesco" formControlName="parentesco" type="text" >
                 </mat-form-field>
                 </div>
-            <div class="col-3 col-sm-2">
+            <div class="col-6 col-sm-2">
                 <mat-form-field appearance="outline">
                     <mat-label>Edad</mat-label>
-                    <input matInput name="edad" formControlName="edad"  type="text" required>
+                    <input matInput name="edad" formControlName="edad"  type="number" >
                 </mat-form-field>
                 </div>
-                <div class="col-1">
-                    <button mat-raised-button color="primary" *ngIf="i==0"  (click)="onAddToDependiente()">Agregar</button>
-                    <!--<button mat-icon-button color="warn" *ngIf="i==0" (click)="onAddToPago()" [disabled]="habilitarPagos">
+                <div class="col-6 col-sm-3 pt-2 text-center">
+                    <!--<button mat-raised-button color="primary" *ngIf="i>=0"  (click)="onAddToDependiente()">Agregar</button>-->
+                    <button mat-icon-button color="primary" *ngIf="i>=0" (click)="onAddToDependiente()">
                         <i class="material-icons">add_circle</i>
-                    </button>-->
+                    </button>
                     <button  mat-icon-button color="warn" *ngIf="i>0"  (click)="onDeleteDependiente(i)">
                         <i class="material-icons">delete</i>
                     </button>
@@ -107,36 +107,36 @@
             <div  formArrayName="aportantes" style="margin-left:15px;">
                 <div  *ngFor="let pag of Aportantes.controls; let i = index" [formGroupName]="i" >
                     <div class="row">
-                    <div class="col-8 col-sm-4">
+                    <div class="col-6 col-sm-4">
                       <mat-form-field appearance="outline">
                     <mat-label>Nombres y Apellidos:</mat-label>
                     <input matInput name="nombres" type="text" formControlName="nombres"
-                        placeholder="Nombres y Apellidos" required>
+                        placeholder="Nombres y Apellidos" >
                 </mat-form-field>
                     </div>
-            <div class="col-3 col-sm-2">
+            <div class="col-6 col-sm-2">
                 <mat-form-field appearance="outline">
                     <mat-label>Edad</mat-label>
-                    <input matInput name="edad" formControlName="edad"  type="text" required>
+                    <input matInput name="edad" formControlName="edad"  type="text" >
                 </mat-form-field>
                 </div>
-            <div class="col-4 col-sm-2">
+            <div class="col-6 col-sm-2">
                 <mat-form-field appearance="outline">
                     <mat-label>Aporte Mensual</mat-label>
-                    <input matInput name="monto" formControlName="monto" type="text" required>
+                    <input matInput name="monto" formControlName="monto" type="text" >
                 </mat-form-field>
                 </div>
-            <div class="col-5 col-sm-2">
+            <div class="col-6 col-sm-2">
                 <mat-form-field appearance="outline">
                     <mat-label>Centro de Trabajo</mat-label>
-                    <input matInput name="compania" formControlName="compania" type="text" required>
+                    <input matInput name="compania" formControlName="compania" type="text" >
                 </mat-form-field>
                 </div>
-                <div class="col-1">
-                    <button mat-raised-button color="primary" *ngIf="i==0"  (click)="onAddToAportante()">Agregar</button>
-                    <!--<button mat-icon-button color="warn" *ngIf="i==0" (click)="onAddToPago()" [disabled]="habilitarPagos">
+                <div class="col-12 col-sm-2">
+                    <!--<button mat-raised-button color="primary" *ngIf="i==0"  (click)="onAddToAportante()">Agregar</button>-->
+                    <button mat-icon-button color="primary" *ngIf="i>=0" (click)="onAddToAportante()">
                         <i class="material-icons">add_circle</i>
-                    </button>-->
+                    </button>
                     <button  mat-icon-button color="warn" *ngIf="i>0"  (click)="onDeleteAportante(i)">
                         <i class="material-icons">delete</i>
                     </button>
@@ -184,7 +184,7 @@
         <tr><th>TIPO: A</th><th>S/ 374,000</th></tr>
         <tr><td>Cuota Inicial</td><td>S/ 74,800</td></tr>
         <tr><td>Saldo </td><td>S/ 299,200</td></tr>
-        <tr><td colspan="2" style="text-align: center;">Coutas</td></tr>
+        <tr><th colspan="2" style="text-align: center;">Coutas</th></tr>
         <tr><td>20 años </td><td>S/ 2,308.23</td></tr>
         <tr><td>25 años </td><td>S/ 2,153.22</td></tr>
         <tr><td colspan="2" style="text-align: center;"><mat-radio-button color="primary" value="tipoA"></mat-radio-button></td></tr>
@@ -196,7 +196,7 @@
        <tr><th>TIPO: B</th><th>S/ 421,600</th></tr>
         <tr><td>Cuota Inicial</td><td>S/ 84,200</td></tr>
         <tr><td>Saldo </td><td>S/ 336,800</td></tr>
-        <tr><td colspan="2" style="text-align: center;">Coutas</td></tr>
+     <tr><th colspan="2" style="text-align: center;">Coutas</th></tr>
         <tr><td>20 años </td><td>S/ 2,602.01</td></tr>
         <tr><td>25 años </td><td>S/ 2,427.26</td></tr>
         <tr><td colspan="2" style="text-align: center;"><mat-radio-button color="primary" value="tipoB"></mat-radio-button></td></tr>
@@ -208,7 +208,7 @@
            <tr><th>TIPO: C</th><th>S/ 489,600</th></tr>
         <tr><td>Cuota Inicial</td><td>S/ 97,920</td></tr>
         <tr><td>Saldo </td><td>S/ 391,680</td></tr>
-        <tr><td colspan="2" style="text-align: center;">Coutas</td></tr>
+           <tr><th colspan="2" style="text-align: center;">Coutas</th></tr>
         <tr><td>20 años </td><td>S/ 3,021.69</td></tr>
         <tr><td>25 años </td><td>S/ 2,818.76</td></tr>
         <tr><td colspan="2" style="text-align: center;"><mat-radio-button color="primary" value="tipoC"></mat-radio-button></td></tr>
@@ -220,7 +220,7 @@
          <tr><th>TIPO: D</th><th>S/ 544,000</th></tr>
         <tr><td>Cuota Inicial</td><td>S/ 108,800</td></tr>
         <tr><td>Saldo </td><td>S/ 435,200</td></tr>
-        <tr><td colspan="2" style="text-align: center;">Coutas</td></tr>
+           <tr><th colspan="2" style="text-align: center;">Coutas</th></tr>
         <tr><td>20 años </td><td>S/ 3,357.43</td></tr>
         <tr><td>25 años </td><td>S/ 3,131.95</td></tr>
         <tr><td colspan="2" style="text-align: center;"><mat-radio-button color="primary" value="tipoD"></mat-radio-button></td></tr>
@@ -233,7 +233,7 @@
 
     <section class="card actions p-3">
         <div class="buttons text-center">
-             <button mat-raised-button color="primary" [disabled]="form.invalid">Enviar </button> 
+             <button mat-raised-button color="primary" [disabled]="form.invalid" class="mr-2">Enviar </button> 
              <button mat-raised-button color="primary" (click)="onReset()">Limpiar</button>
         </div>
     </section>
