@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators,ReactiveFormsModule, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { ApiService } from 'app/api.service';
 
 @Component({
   selector: 'encuesta',
@@ -10,7 +11,11 @@ styleUrls: ['./encuesta.component.css'],
 export class EncuestaComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private api:ApiService
+
+  ) {}
    get Dependientes() {
       return this.form.get('dependientes') as FormArray;
     }
@@ -43,7 +48,13 @@ export class EncuestaComponent implements OnInit {
   onSubmit(): void {
     if (this.form.valid) {
       console.log('Formulario enviado:', this.form.value);
-      alert('Formulario enviado correctamente');
+    this.api.grabarEncuesta(this.form.value).subscribe(data => {
+      if (data) {
+        console.log(data);
+      }
+    });
+    alert('Formulario enviado correctamente');
+     this.onReset();
     } else {
       this.form.markAllAsTouched();
     }
@@ -77,11 +88,19 @@ onDeleteAportante(index:number):void{
 
 
   onReset(): void {
-    this.form.reset({
-      gender: 'male',
-      options: 'opt1',
-      notifications: false,
-      accept: false
-    });
+
+    const total = this.Aportantes.length;
+    const totalfami = this.Dependientes.length;
+    // elimina desde el último hasta el segundo elemento
+    for (let i = total - 1; i >= 1; i--) {
+      this.onDeleteAportante(i);
+    }
+    for (let i = totalfami - 1; i >= 1; i--) {
+      this.onDeleteDependiente(i);
+    }
+   // this.Aportantes.clear();
+     this.form.reset({});
   }
+   
+   
 }

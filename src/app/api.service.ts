@@ -262,6 +262,14 @@ getSucursalUsuario(){
     }, { headers: this.headers }).pipe(map(data => data));
 }
 
+
+grabarEncuesta(encuesta:any){
+      const url = Global.BASE_API_URL + 'reportes.php/encuesta';
+    return this._http.post(url,{encuesta
+    }, { headers: this.headers }).pipe(map(data => data));
+}
+
+
 /*Registrar observacion */
 
 observacion(venta:any){
